@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<h1 align="center"> {{ comp_name }}</h1>
+<!-- BODY -->
+
+   
+
+      
+      <div class="row text-center">
+
+	  <div class="col-md-4">
+	    <!-- CHROME EXTENSION -->
+	    <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-chrome fa-stack-1x fa-inverse"></i>
+            </span>
+	    
+	    <h4 class="service-heading">Chrome Extension</h4>
+            <p class="text-muted">
+	      Our chrome extension is now available <a href="https://chrome.google.com/webstore/detail/charityad/acaolmpphmfnffmelignomoddonoiphm"> HERE</a></p>
+
+	  </div>
+
+	  <div class="col-md-4">
+
+	    <!-- TWEETING -->
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+
+	    <h4 class="service-heading">Tweet to  {{ comp_name }}</h4>
+	    <h4>
+	      <iframe src={{ tweet }}
+		      width="140"
+		      height="28"
+		      title="Twitter Tweet Button"
+		      style="border: 0; overflow: hidden;">
+	      </iframe>
+
+	    </h4>
+	    <p class="text-muted">We know that you want your purchases to be honest.  Let companies know you care.</p>
+          </div>
+
+	  <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-question fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Learn More</h4>
+            <p class="text-muted">Read more about our sources.</p>
+          </div>
+	  
+        </div>
+
+     
+   
+
+
+{% endblock %}
