@@ -1,4 +1,6 @@
 from bs4 import BeautifulSoup
+import pandas as pd
+pd.set_option('display.max_colwidth', -1)
 
 def get_article_elements( url ):
     soup = BeautifulSoup( urllib.request.urlopen( url ), "html.parser")
@@ -17,13 +19,24 @@ def ibm_query_to_html( df,ibm_string):
     #print(df.columns)
     #print()
     def href_format(row):
-        href = '<a href="{0}">{1}</a>'
+        href = '<a href="{0}" target="_blank">{1}</a>'
+        #print(row['URL'] )
         return href.format(row['URL'], row['Title'])
     
     df['Article'] = df.apply(href_format, axis=1)
     # Remove title and link.
     df.drop(columns=['Title', 'URL'], inplace=True)
+
+    df_html_output =  ''.join(df.to_html(escape=False,
+                              columns=[ 'Article', 'Source','Sentiment', 'Relevance'],
+                              index=False))
+    #df_html_output = df_html_output.replace('<t>','<th style = "background-color: red">')
+    print(df_html_output)
+    return df_html_output
+    
+    """
     # Turn df to html to single string.
     return ''.join(df.to_html(escape=False,
-                              columns=['Sentiment', 'Article', 'Relevance'],
-                              index=False))
+                              columns=['Sentiment', 'Article', 'Source', 'Relevance'],
+                              index=False, justify="center"))
+    """

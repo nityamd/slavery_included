@@ -7,21 +7,20 @@ h2              { font-size: 1.2em; }
 
 */
 
-.dataframe table, .dataframe th, .dataframe td {
-  border: none ;
+table.dataframe, .dataframe th, .dataframe td {
+  border: none;
   border-bottom: 1px solid #C8C8C8;
   border-collapse: collapse;
-  text-align:center;
+  text-align:left;
   padding: 10px;
   margin-bottom: 40px;
   font-size: 0.9em;
-  float: left;
+  word-wrap:break-word;
+  width:50%;
 }
 
-
-
-table.tableSection th, table.tableSection td {
-   
+img {
+    width: 100%;
 }
 
 .male th {

@@ -1,14 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<br>
-<h1 align="center"> {{ comp_name }}</h1>
+
+<style type="text/css">
+  {% include "style.css" %}
+    </style>
+
+
 <!-- BODY -->
 
-   
+<div class="container"  align="center" >
 
-      
-      <div class="row text-center">
+  <h1 align="center"> {{ comp_name }}</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <img src="../static/img/map.png" alt="map">
+    </div>
+    
+    <div class="col-sm-4">
+     	<p class="text-muted"> {{ watson_description }}
+	</p>
+        {{ watson_table|safe }}
+    </div>
+ </div>
+  
+
+</div>    
+
+
+<div class="row text-center">
 
 	  <div class="col-md-4">
 	    <!-- CHROME EXTENSION -->
@@ -19,7 +40,7 @@
 	    
 	    <h4 class="service-heading">Chrome Extension</h4>
             <p class="text-muted">
-	      Our chrome extension is now available <a href="https://chrome.google.com/webstore/detail/charityad/acaolmpphmfnffmelignomoddonoiphm"> HERE</a></p>
+	      Our chrome extension is now available <a href="https://chrome.google.com/webstore/detail/charityad/acaolmpphmfnffmelignomoddonoiphm"  target="_blank"> HERE</a></p>
 
 	  </div>
 

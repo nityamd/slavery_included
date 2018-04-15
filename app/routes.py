@@ -33,13 +33,10 @@ def index():
         tweet_link = construct_tweet_link( 'custom_link')
 
     watson_query, watson_description = elementary.mydearwatson(comp_name)
-    #print(watson_query.columns)
+    
     table = ibm_query_to_html( watson_query, watson_description)
-
-    print(watson_query.columns)
-
-    ## Only for dev purposes
-    return render_template('index.html', comp_name=name, tweet=tweet_link, table=table)    
+    return render_template('index.html', comp_name=name, tweet=tweet_link,
+                           watson_table=table, watson_description=watson_description)    
     #return render_template('index.html', comp_name=name)
 
 
