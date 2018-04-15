@@ -14,13 +14,13 @@ def mydearwatson(input_seller):
 
     # --- Authentication ----
     discovery = DiscoveryV1(
-        username="0f0d0683-fe01-4409-8fd3-ff5b0966da31",
-        password="QVeoQYmEchVs",
+        username="60dd891d-9f19-4fd2-bb8a-912add37f1b4",
+        password="tN4F1bLcMzQH",
         version="2017-11-07"
     )
     #--- Need to write a function to read seller ------
 
-    query_string = 'enriched_text.entitites.text:' + input_seller + ', labor|labour'
+    query_string = 'enriched_text.entities.text:' + input_seller + ', labor|labour'
     qopts = {'query': query_string, 'counts':'10'}
     my_query = discovery.query('system', 'news-en', qopts)
 
@@ -35,7 +35,13 @@ def mydearwatson(input_seller):
     relevance = [my_query["results"][i]['result_metadata']['score'] for i in range(3)]
     titles = [my_query["results"][i]["title"] for i in range(3)]
     urls = [my_query["results"][i]["url"] for i in range(3)]
-    orgs = [my_query["results"][i]["forum_title"] for i in range(3)]
+    orgs = []
+    for i in range(3):
+        try:
+            orgs.append(my_query["results"][i]["forum_title"])
+        except KeyError:
+            orgs.append(None)
+
     #whether or not link is  'positive', 'negative' or 'neutral'
     label = [my_query["results"][i]['enriched_text']['sentiment']['document']['label'] for i in range(3)]
 
@@ -49,3 +55,9 @@ def mydearwatson(input_seller):
     output_string = 'IBM Watson Discovery News API estimates {} matches for {} with a total weighted sentiment of {:.1f}'
     output_string = output_string.format(number, input_seller, scoooore)
     return(po,output_string)
+
+if __name__ == '__main__':
+    comp = 'Patagonia'
+    a, b = mydearwatson(comp)
+    print(b)
+    print(a)
