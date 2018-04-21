@@ -27,13 +27,14 @@
 
   <div class="row">
 
-    <div class="col-4">
+    <div class="col-6">
      	<p class="text-muted"> {{ watson_description }}
 	</p>
         {{ watson_table|safe }}
     </div>
 
-    <div class="col-8" id="d3map">
+    <div class="col-6" id="d3map">
+      <h6>This company may support forced labor in its supply chain. Explore the interactive map to see where materials may come from</h6>
       <div id="map"></div>
     </div>
 
@@ -102,9 +103,103 @@
             <h4 class="service-heading">Learn More</h4>
             <p class="text-muted">Read more about our sources.</p>
     </div>
-	  
+
+
+    
   </div>
+
+  
+  
 </div>
+<div class="container"  align="center" >
+
+  <div class="row text-center">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Questions</th>
+      <th>Company_response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Requires their first tier suppliers to implement standards that are in line with the company's supply chain standards</td>
+      <td>Neutral</td>
+    </tr>
+    <tr>
+      <td>Requires that no fees be charged during recruitment processes conducted throughout their supply chains</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>Has publicly demonstrated their awareness of and commitment to addressing forced labor</td>
+      <td>Negative</td>
+    </tr>
+    <tr>
+      <td>Trains suppliers on risks, policies, and standards related to human trafficking and forced labor</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>Participated in one or more multi-stakeholder or industry initiatives focused on forced labor and human trafficking</td>
+      <td>Neutral</td>
+    </tr>
+    <tr>
+      <td>Adopted more stringent policies on eliminating foreign worker deductions</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>Ensures recruitment agencies in their supply chains are audited</td>
+      <td>Negative</td>
+    </tr>
+    <tr>
+      <td>Ensures workers sign contracts directly with suppliers to avoid exploitation through recruitment agencies</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>Ensures remedy is provided to supply chain workers whose rights have been violated</td>
+      <td>Neutral</td>
+    </tr>
+    <tr>
+      <td>Provides a detailed map of supply chain</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>Seeks external audits of their supply chain</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>Relocates forced labourers to safer and higher quality dormitories</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>Demonstrate strong practices with respect to training and stakeholder engagement</td>
+      <td>Negative</td>
+    </tr>
+    <tr>
+      <td>Has processes to trace its supply chain of beyond it's first-tier suppliers</td>
+      <td>Positive</td>
+    </tr>
+    <tr>
+      <td>Discloses names and locations of its first-tier suppliers, and some information on suppliers beyond its first tier</td>
+      <td>Negative</td>
+    </tr>
+    <tr>
+      <td>Demands its first-tier suppliers ensure that their own suppliers implement standards that are in line with the company's standards</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>Communicates its human trafficking and forced labor policies and standards to supply chain workers in their native languages</td>
+      <td>Neutral</td>
+    </tr>
+    <tr>
+      <td>The company has an accessible, formal grievance mechanism that facilitates the impartial reporting by suppliers' workers of workplace grievances and informs workers as to how to access the mechanism.</td>
+      <td>Neutral</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  </div>
+
 
 <script>
 // initial configuration
@@ -116,7 +211,7 @@ const format = d3.format(',');
 const tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html(d => `<strong>Country: </strong><span class='details'>${d.properties.name}<br></span><strong>Population: </strong><span class='details'>${format(d[colorVariable])}</span>`);
+  .html(d => `<strong>Country: </strong><span class='details'>${d.properties.name}<br></span><strong>Forced Labor Score: </strong><span class='details'>${format(d[colorVariable])}</span>`);
 
 // tip box location settings
 tip.direction(function(d) {
@@ -126,7 +221,8 @@ tip.direction(function(d) {
   if (d.properties.name === 'Canada') return 'e';
   if (d.properties.name === 'USA') return 'e';
   if (d.properties.name === 'Mexico') return 'e';
-  // Europe
+
+// Europe
   if (d.properties.name === 'Iceland') return 's';
   if (d.properties.name === 'Norway') return 's';
   if (d.properties.name === 'Sweden') return 's';
