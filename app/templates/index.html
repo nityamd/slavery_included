@@ -27,11 +27,11 @@
             </div>
             
             <div class="row">
-                <div class="col-4">
+                <div class="column-custom-4">
                     <h3 align="left"> Headquarters: </h3>
                     <h5 class="text-muted" align="left"> {{ address }}</h5>
                 </div>
-                <div class="col-8">
+                <div class="column-custom-8">
                     <h3 align="left"> KnowTheChain Score: </h3>
                     <h4 class="text-muted" align="left"> <a href="{{ktc_link}}" target="_blank">{{ ktc_score }}</a></h4>
                 </div>
@@ -57,15 +57,26 @@
                 <!-- <div class="row"> -->
                 <div class="col-6">
                     <p class="text-muted"> {{ watson_description }} </p>
+                    {{ watson_table|safe }}
                 </div>
                 
                 <div class="col-6">
                     <p class="text-muted"> This company may support forced labor in its supply chain. Explore the interactive map to see where materials may come from. </p>
+                    <div id="map">
+
+                        <div id="variable-select">
+                            <select id = "variable">
+                                {% for g in goodlist %}
+                                <option value="{{g}}">{{g}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
-
+            <!--
             <div class="row">
-            <!-- <div class="row"> -->
                 <div class="col-6">
                     {{ watson_table|safe }}
                 </div>
@@ -80,7 +91,7 @@
                     </div>
                 </div>
                 
-            </div>            
+            </div>        -->
         </div>
         
         <div class="container"  align="center" >
@@ -312,7 +323,7 @@
             //const width = parentWidth  //- margin.left - margin.right;  //800
             //const width = 800 - margin.left - margin.right;  //800
             
-            const width = document.getElementById("map").clientHeight
+            const width = document.getElementById("map").clientWidth ;
             const height = 400 - margin.top - margin.bottom;  //420
 
             //const height = document.getElementById("map").clientWidth

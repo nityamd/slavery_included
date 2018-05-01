@@ -589,3 +589,51 @@ table {
   table-layout: fixed;
   width: 100%
 }
+
+
+/*  -------------------------------------------------------------------------- */
+/*  The following is to resize the aligned objects when the window resizes */
+/*  -------------------------------------------------------------------------- */
+
+.col-6 {
+    flex: 50%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .col-6{
+        flex:100%;
+        max-width: 100%;
+    }
+}
+
+.column-custom-4 {
+    flex: auto;
+    max-width: 40%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .column-custom-4{
+        flex: auto;
+        max-width: 100%;
+    }
+}
+
+.column-custom-8 {
+    flex: auto;
+    max-width: 60%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .column-custom-8{
+        flex: auto;
+        max-width: 100%;
+    }
+}
+
