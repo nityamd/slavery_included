@@ -21,6 +21,9 @@ def ibm_query_to_html( df,ibm_string):
         href = '<a href="{0}" target="_blank">{1}</a>' 
         return href.format(row['URL'], row['Title'])
     df['Article'] = df.apply(href_format, axis=1)
+
+    # Drop Precision.
+    df['Relevance'] = df['Relevance'].apply(lambda x: '{}'.format(round(float(x))))
     
     # Remove title and link.
     df.drop(columns=['Title', 'URL'], inplace=True)
@@ -30,7 +33,6 @@ def ibm_query_to_html( df,ibm_string):
                               columns=[ 'Article', 'Source','Sentiment', 'Relevance'],
                               index=False))
     #df_html_output = df_html_output.replace('<t>','<th style = "background-color: red">')
-    print(df_html_output)
     return df_html_output
     
     """
