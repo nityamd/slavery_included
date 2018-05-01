@@ -18,7 +18,7 @@ table.dataframe, .dataframe th, .dataframe td {
   border: none;
   border-bottom: 1px solid #C8C8C8;
   border-collapse: collapse;
-  text-align:left;
+  text-align: left;
   padding: 10px;
   margin-bottom: 40px;
   margin-left: 2px;
@@ -28,7 +28,14 @@ table.dataframe, .dataframe th, .dataframe td {
   font-size: 0.9em;
   word-wrap:break-word;
   width:100%;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+.dataframe th { background-color:#212529;color:white;
+		padding:10px;
+		font-size:1.1em;
+	        text-transform: uppercase;}
+
 
 img {
     width: 100%;
@@ -44,8 +51,8 @@ img {
     color: white;
 }
 
-tr:nth-child(odd)		{ background-color:#eee; }
-tr:nth-child(even)	{ background-color:#fff; }
+tr:nth-child(odd)		{ background-color:#fff; }
+tr:nth-child(even)	{ background-color:#eee; }
 
-tr:hover            { background-color: #ffff99;}
+tr:hover            { background-color: #fed136;}
 

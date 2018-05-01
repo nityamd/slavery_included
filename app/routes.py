@@ -6,7 +6,7 @@ from app.models import Company, Good, Country
 from custom_tweet import construct_tweet_link
 import elementary 
 from web_content import ibm_query_to_html
-
+import random
 import json
 import pandas as pd
 
@@ -18,20 +18,21 @@ def index():
     product_name = request.args.get('productname')
 
     # Populate company info.
-    #name = Company.query.filter_by(name=comp_name).first()
-    df = pd.read_csv('company_info.csv')
-    if comp_name:
-        row = df[df.comp_name == comp_name]
-        name = row.comp_name
-        comphandle = row.twitter_handle.values[0][1:]
-        tweet_link = construct_tweet_link( comphandle )
-        
-        name = row.comp_name.values[0]
-    else:
-        name = 'Select a Company'
-        tweet_link = construct_tweet_link( 'custom_link')
+    company = db.session.query(Company).filter_by(compname=comp_name).first()
 
-    watson_query, watson_description = elementary.mydearwatson(comp_name)
+    # Redirection Error or no company given (aka landing page).
+    if company is None or comp_name is None:
+        company = random.choice(Company.query.all())
+        
+    name = company.compname 
+    comphandle = company.twitter_handle
+    tweet_link = construct_tweet_link( comphandle )
+    address = company.address
+    ktc_score = company.knowthechain_score
+    ktc_link = company.knowthechain_link
+    website = company.website
+    transparency = company.transparency
+    watson_query, watson_description = elementary.mydearwatson(name)
 
     # load labor data into dataframe
     tsv = os.path.join(app.root_path, "../public/world_population.tsv")
@@ -42,38 +43,39 @@ def index():
     findat = {}
     goodlist = []
 
-    # query database for country data
-    if comp_name is not None:
-        comp = db.session.query(Company).filter_by(compname=comp_name).first()
-        for g in comp.goods:
-            goodname = g.goodname
-            goodlist.append(goodname)
-            countries = [c.countryname for c in g.good_countries]
+    # query database for country data 
+    for g in company.goods:
+        goodname = g.goodname
+        goodlist.append(goodname)
+        countries = [c.countryname for c in g.good_countries]
 
-            # keep only those records that are in the relevant countries
-            keepdat = []
-            for c in chart_data:
-                if c["name"] in countries:
-                    c["population"] = 75
-                else:
-                    c["population"] = 10
-                keepdat.append(c.copy())
+        # keep only those records that are in the relevant countries
+        keepdat = []
+        for c in chart_data:
+            if c["name"] in countries:
+                c["population"] = 75
+            else:
+                c["population"] = 10
+            keepdat.append(c.copy())
 
-            findat[goodname] = keepdat
+        findat[goodname] = keepdat
 
-        chart_data = json.dumps(findat, indent=2)
-        data = {'chart_data': chart_data}
+    chart_data = json.dumps(findat, indent=2)
+    data = {'chart_data': chart_data}
  
     table = ibm_query_to_html( watson_query, watson_description)
     return render_template('index.html',
                            comp_name=name,
+                           address=address,
+                           ktc_score=ktc_score,
+                           ktc_link=ktc_link,
+                           transparency=transparency,
+                           website=website,
                            tweet=tweet_link,
                            data=data,
                            goodlist=goodlist,
                            watson_table=table,
                            watson_description=watson_description)    
-    #return render_template('index.html', comp_name=name)
-
 
 @app.route('/test')
 def test():

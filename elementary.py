@@ -14,8 +14,8 @@ def mydearwatson(input_seller):
 
     # --- Authentication ----
     discovery = DiscoveryV1(
-        username="60dd891d-9f19-4fd2-bb8a-912add37f1b4",
-        password="tN4F1bLcMzQH",
+        username="8ebaabe3-9725-474e-b846-5c7406092690",
+        password="J4CgWykQ1Ozz",
         version="2017-11-07"
     )
     #--- Need to write a function to read seller ------

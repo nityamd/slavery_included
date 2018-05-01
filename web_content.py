@@ -15,18 +15,17 @@ def get_article_elements( url ):
 def ibm_query_to_html( df,ibm_string):
     # Remove unnecessary index.
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-    # Combine title and link into href.
-    #print(df.columns)
-    #print()
-    def href_format(row):
-        href = '<a href="{0}" target="_blank">{1}</a>'
-        #print(row['URL'] )
-        return href.format(row['URL'], row['Title'])
     
+    # Combine title and link into href.
+    def href_format(row):
+        href = '<a href="{0}" target="_blank">{1}</a>' 
+        return href.format(row['URL'], row['Title'])
     df['Article'] = df.apply(href_format, axis=1)
+    
     # Remove title and link.
     df.drop(columns=['Title', 'URL'], inplace=True)
 
+    #df['Relevance'] = '{:.1f}'.format(float(df['Relevance']))
     df_html_output =  ''.join(df.to_html(escape=False,
                               columns=[ 'Article', 'Source','Sentiment', 'Relevance'],
                               index=False))
