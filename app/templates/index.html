@@ -57,7 +57,24 @@
                 <!-- <div class="row"> -->
                 <div class="col-6">
                     <p class="text-muted"> {{ watson_description }} </p>
-                    {{ watson_table|safe }}
+                    <table class="dataframe">
+                        <tr>
+                            <th>Article</th>
+                            <th>Source</th>
+                            <th>Sentiment</th>
+                            <th>Relevance</th>
+                        </tr>
+                        {% for index, row in watson_table.iterrows()%}
+                        <tr>
+                            <td>
+                                <a href="{{row.URL}}" target="_blank">{{row.Title}}</a>
+                            </td>
+                            <td>{{row.Source}}</td>
+                            <td>{{row.Sentiment}}</td>
+                            <td>{{row.Relevance}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                 </div>
                 
                 <div class="col-6">
@@ -75,23 +92,6 @@
                     </div>
                 </div>
             </div>
-            <!--
-            <div class="row">
-                <div class="col-6">
-                    {{ watson_table|safe }}
-                </div>
-                
-                <div class="col-6" id="map">
-                    <div id="variable-select">
-                        <select id = "variable">
-                            {% for g in goodlist %}
-                            <option value="{{g}}">{{g}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                
-            </div>        -->
         </div>
         
         <div class="container"  align="center" >

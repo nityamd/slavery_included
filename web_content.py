@@ -24,7 +24,10 @@ def ibm_query_to_html( df,ibm_string):
 
     # Drop Precision.
     df['Relevance'] = df['Relevance'].apply(lambda x: '{}'.format(round(float(x))))
-    
+
+    return df 
+
+    """
     # Remove title and link.
     df.drop(columns=['Title', 'URL'], inplace=True)
 
@@ -34,7 +37,7 @@ def ibm_query_to_html( df,ibm_string):
                               index=False))
     #df_html_output = df_html_output.replace('<t>','<th style = "background-color: red">')
     return df_html_output
-    
+    """
     """
     # Turn df to html to single string.
     return ''.join(df.to_html(escape=False,

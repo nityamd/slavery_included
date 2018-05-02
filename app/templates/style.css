@@ -29,6 +29,7 @@ table.dataframe, .dataframe th, .dataframe td {
   word-wrap:break-word;
   width:100%;
   font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /*font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
 }
 
 .dataframe th { background-color:#212529;color:white;
