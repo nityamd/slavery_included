@@ -59,19 +59,22 @@
                     <p class="text-muted"> {{ watson_description }} </p>
                     <table class="dataframe">
                         <tr>
-                            <th>Article</th>
                             <th>Source</th>
-                            <th>Sentiment</th>
+                            <th>Article</th>
                             <th>Relevance</th>
                         </tr>
-                        {% for index, row in watson_table.iterrows()%}
+                        {% for index, row in watson_table.iterrows() %}
                         <tr>
-                            <td>
-                                <a href="{{row.URL}}" target="_blank">{{row.Title}}</a>
-                            </td>
-                            <td>{{row.Source}}</td>
-                            <td>{{row.Sentiment}}</td>
-                            <td>{{row.Relevance}}</td>
+                          <td>{{row.Source}}</td>
+			  {% if row.Sentiment == 'positive' %}
+			      {% set row_color = "#25D159" %}
+			  {% elif row.Sentiment == 'negative' %}
+			      {% set row_color = "#F93B3F" %}
+			  {% else -%}
+			      {% set row_color = "#FFDD3A" %}
+			  {% endif %}
+			  <td bgcolor="{{ row_color }}"><a href="{{row.URL}}" target="_blank">{{row.Title}}</a></td>
+                          <td align="center">{{row.Relevance}}</td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -80,7 +83,6 @@
                 <div class="col-6">
                     <p class="text-muted"> This company may support forced labor in its supply chain. Explore the interactive map to see where materials may come from. </p>
                     <div id="map">
-
                         <div id="variable-select">
                             <select id = "variable">
                                 {% for g in goodlist %}
