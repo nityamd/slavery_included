@@ -32,6 +32,7 @@ def mydearwatson(input_seller):
     #no of matches
     number = np.int(my_query["matching_results"])
 
+    #getting the Titles, Sources and URL's for the most relevant articles
     relevance = [my_query["results"][i]['result_metadata']['score'] for i in range(3)]
     titles = [my_query["results"][i]["title"] for i in range(3)]
     urls = [my_query["results"][i]["url"] for i in range(3)]
@@ -51,9 +52,9 @@ def mydearwatson(input_seller):
 
 
     #Getting an aggregate score
-    scoooore = np.mean([my_query["results"][i]['enriched_text']['sentiment']['document']['score'] for i in range(10)])
+    score = np.mean([my_query["results"][i]['enriched_text']['sentiment']['document']['score'] for i in range(10)])
     output_string = 'IBM Watson Discovery News API estimates {} matches for {} with a total weighted sentiment of {:.1f}'
-    output_string = output_string.format(number, input_seller, scoooore)
+    output_string = output_string.format(number, input_seller, score)
     return(po,output_string)
 
 if __name__ == '__main__':
